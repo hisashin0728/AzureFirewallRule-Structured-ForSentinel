@@ -16,7 +16,18 @@
 | TI map IP entity to AzureFirewall | TBD | - |
 | Several deny actions registered | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
 | Multiple Sources Affected by the Same TI Destination | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
-| Port Sweep | TBD | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortSweep.json) |
+| Port Sweep | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortSweep.json) |
 | Abnormal Deny Rate for Source IP | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalDenyRateforSourceIP.json) |
 | Abnormal Port to Protocol | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalPortProtocol.json) |
 | Port Scan | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortScan.json) |
+
+# サポートなど
+> 不具合や問題があれば、Issues からご連絡下さい。
+
+# 免責事項
+> 本レポジトリの使用における Microsoft Sentinel の課金はユーザー側責任となります。
+
+- 本レポジトリのコンテンツによって発生するコストについては、利用するユーザーが責任を負います。
+- 本レポジトリのコンテンツによって作成される環境から出力される内容について、作成者は責任を負いません。
+- 本レポジトリはオープンソースです。 
+
