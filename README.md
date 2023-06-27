@@ -2,21 +2,12 @@
 > 目的
 本レポジトリは Microsoft Sentinel で提供されている Azure Firewall のテンプレートルール (Analytics Rule) を　Structured 形式に対応した形式に書き換えた分析ルールサンプルを提供しています。
 
-- 通常の AzureFirewall 診断ログクエリー例
-```
-AzureDiagnostics
-| where OperationName == "AzureFirewallApplicationRuleLog" or OperationName == "AzureFirewallNetworkRuleLog"
-| parse msg_s with * "from " srcip ":" srcport " to " dsturl ":" dstport
-| where isnotempty(dsturl) and isnotempty(srcip)
-```
+- AzureFirewall 構造型ファイアウォールログとは
+構造化ログ (Structured Log) は、特定の形式で構成されたログデータの一種です。これまでの AzureFirewall ログは AzureDiagnostic テーブルに含まれていたため、5-tuples (送受信 IP, ポート, プロトコル) などの情報は AzureDiagnostic テーブルのカラムをユーザー側で正規化して抽出する作業が必要でした。<BR>
+Azure Firewall の構造化ログでは、ネットワークルール、アプリケーションルール専用に Log Analytics ワークスペースのテーブルが作成され、標準で送信/宛先の IP アドレス、プロトコル、ポート番号、ファイアウォールによって実行されたアクションなどの情報が含まれます。また、イベントの時刻や Azure Firewall インスタンスの名前など、さらに多くのメタデータも含まれます。
 
-- 新たに提供された Structured 形式のAzureFirewall 診断ログクエリー例
-```
-AZFWNetworkRule
-```
-```
-AZFWApplicationRule
-```
+<img width="872" alt="image" src="https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/assets/55295601/cb247e61-713d-4b1d-8abc-a4ad185763aa">
+
 
 # テンプレートルールリスト
 
