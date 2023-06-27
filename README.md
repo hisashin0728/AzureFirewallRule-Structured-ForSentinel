@@ -32,7 +32,7 @@ AZFWApplicationRule
 | Port Scan | TBD | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>※AZFWApplicationRule は 80,443 のみのため、Port Scan を書ける必要無しと判断 |
 
 # 例
-PortScan ルールの例
+**PortScan ルール(標準)**
 ```sql
 let RunTime = 1h;
 let StartRunTime = 1d;
@@ -52,7 +52,7 @@ AzureDiagnostics
 
 Structured 形式に変換する場合、テーブルが別なので、join するか 2 つのルールに分けるかを確認する必要がある<BR>
 
-― PortScan - AZFWNetworkRule
+**PortScan - AZFWNetworkRule**
 ```sql
 let RunTime = 1h;
 let StartRunTime = 1d;
