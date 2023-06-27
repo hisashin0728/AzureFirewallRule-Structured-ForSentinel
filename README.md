@@ -29,6 +29,6 @@ AZFWApplicationRule
 | Port Sweep | TBD | - |
 | Abnormal Deny Rate for Source IP | TBD | - |
 | Abnormal Port to Protocol | TBD | - |
-| Port Scan | TBD | - |
+| Port Scan | TBD | - Port Scan - AZFWNetworkRule.json<BR>- Port Scan - AZFWApplicationRule.json |
 
 # 例
