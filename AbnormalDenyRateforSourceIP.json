@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspace": {
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspace'), 'Microsoft.SecurityInsights'),'/alertRules/301714fc-9f48-4106-8a62-6380a216fb5f')]",
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/301714fc-9f48-4106-8a62-6380a216fb5f')]",
+            "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
+            "kind": "Scheduled",
+            "apiVersion": "2022-11-01-preview",
+            "properties": {
+                "displayName": "Abnormal Deny Rate for Source IP",
+                "description": "Identifies abnormal deny rate for specific source IP to destination IP based on the normal average and standard deviation learned during a configured period. This can indicate potential exfiltration, initial access or C2, where attacker tries to exploit the same vulnerability on machines in the organization, but is being blocked by firewall rules.\n\nConfigurable Parameters:\n\n- Minimum of stds threshold - the number of stds to use in the threshold calculation. Default is set to 3.\n- Learning period time - learning period for threshold calculation in days. Default is set to 5.\n- Bin time - learning buckets time in hours. Default is set to 1 hour.\n- Minimum threshold - minimum threshold for alert. Default is set to 5.\n- Minimum bucket threshold - minimum learning buckets threshold for alert. Default is set to 5.",
+                "severity": "Medium",
+                "enabled": false,
+                "query": "  let LearningPeriod = 1d;\n  let RunTime = 1h;\n  let StartLearningPeriod = LearningPeriod + RunTime;\n  let EndRunTime = RunTime - 1h;\n  let BinTime = 1h;\n  let NumOfStdsThreshold = 3;\n  let MinThreshold = 5.0;\n  let MinLearningBuckets = 5;\n  let TrafficLogs = (union isfuzzy=true\n  (AzureDiagnostics\n  | where OperationName == \"AzureFirewallApplicationRuleLog\" or OperationName == \"AzureFirewallNetworkRuleLog\" \n  | parse msg_s with * \"from \" SourceIp \":\" SourcePort:int \" to \" Fqdn \":\" DestinationPort:int \". \" * \"Action: \" Action \".\" *\n  | where Action == \"Deny\"\n  | where isnotempty(Fqdn) and isnotempty(SourceIp)),\n  (AZFWNetworkRule\n  | extend Fqdn = DestinationIp\n  | where Action == \"Deny\"\n  | where isnotempty(Fqdn) and isnotempty(SourceIp)),\n  (AZFWApplicationRule\n  | where Action == \"Deny\"\n  | where isnotempty(Fqdn) and isnotempty(SourceIp)));\n  let LearningSrcIpDenyRate = (TrafficLogs\n  | where TimeGenerated between (ago(StartLearningPeriod) .. ago(RunTime))\n  | summarize count() by SourceIp, bin(TimeGenerated, BinTime), Fqdn\n  | summarize LearningTimeSrcIpDenyRateAvg = avg(count_), LearningTimeSrcIpDenyRateStd = stdev(count_), LearningTimeBuckets = count() by SourceIp, Fqdn\n  | where LearningTimeBuckets > MinLearningBuckets);\n  let AlertTimeSrcIpDenyRate = (TrafficLogs\n  | where TimeGenerated between (ago(RunTime) .. ago(EndRunTime))\n  | summarize AlertTimeSrcIpDenyRateCount = count() by SourceIp);\n  AlertTimeSrcIpDenyRate\n  | join kind=leftouter (LearningSrcIpDenyRate) on SourceIp\n  | extend LearningThreshold = max_of(LearningTimeSrcIpDenyRateAvg + NumOfStdsThreshold * LearningTimeSrcIpDenyRateStd, MinThreshold)\n  | where AlertTimeSrcIpDenyRateCount > LearningThreshold\n  | project-away SourceIp1, LearningTimeSrcIpDenyRateAvg, LearningTimeSrcIpDenyRateStd",
+                "queryFrequency": "PT1H",
+                "queryPeriod": "PT25H",
+                "triggerOperator": "GreaterThan",
+                "triggerThreshold": 1,
+                "suppressionDuration": "PT1H",
+                "suppressionEnabled": false,
+                "startTimeUtc": null,
+                "tactics": [
+                    "InitialAccess",
+                    "Exfiltration",
+                    "CommandAndControl"
+                ],
+                "techniques": [],
+                "alertRuleTemplateName": "d36bb1e3-5abc-4037-ad9a-24ba3469819e",
+                "incidentConfiguration": {
+                    "createIncident": true,
+                    "groupingConfiguration": {
+                        "enabled": false,
+                        "reopenClosedIncident": false,
+                        "lookbackDuration": "PT5H",
+                        "matchingMethod": "AllEntities",
+                        "groupByEntities": [],
+                        "groupByAlertDetails": [],
+                        "groupByCustomDetails": []
+                    }
+                },
+                "eventGroupingSettings": {
+                    "aggregationKind": "SingleAlert"
+                },
+                "alertDetailsOverride": null,
+                "customDetails": null,
+                "entityMappings": [
+                    {
+                        "entityType": "IP",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Address",
+                                "columnName": "SourceIp"
+                            }
+                        ]
+                    },
+                    {
+                        "entityType": "URL",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Url",
+                                "columnName": "Fqdn"
+                            }
+                        ]
+                    }
+                ],
+                "sentinelEntitiesMappings": null,
+                "templateVersion": "1.0.0"
+            }
+        }
+    ]
+}
