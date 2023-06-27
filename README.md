@@ -9,6 +9,7 @@
 <img width="872" alt="image" src="https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/assets/55295601/cb247e61-713d-4b1d-8abc-a4ad185763aa">
 
 # テンプレートルールリスト
+> Microsoft Sentinel で提供されているテンプレートルールのマッピング表です
 
 |  テンプレートルール名  |  Status  | リンク |
 | ---- | ---- | ---- |
@@ -22,6 +23,8 @@
 | Port Scan | Done | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>※AZFWApplicationRule は 80,443 のみのため、Port Scan を書ける必要無しと判断 |
 
 # 例
+> Sample
+
 **PortScan ルール(標準)**
 ```sql
 let RunTime = 1h;
