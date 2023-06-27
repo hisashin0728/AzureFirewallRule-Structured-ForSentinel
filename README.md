@@ -51,7 +51,9 @@ AzureDiagnostics
 ```
 
 Structured 形式に変換する場合、テーブルが別なので、join するか 2 つのルールに分けるか要検討<BR>
-※パフォーマンスを考慮して、NetworkRule と ApplicationRule の二つを作成中
+※パフォーマンスを考慮して、NetworkRule と ApplicationRule の二つを作成
+
+― PortScan - AZFWNetworkRule
 ```sql
 let RunTime = 1h;
 let StartRunTime = 1d;
@@ -61,5 +63,17 @@ let BinTime = 30s;
 AZFWNetworkRule
 | where TimeGenerated between (ago(StartRunTime) .. ago(EndRunTime))
 | summarize AlertTimedCountPortsInBinTime = dcount(DestinationPort) by SourceIp, bin(TimeGenerated, BinTime), DestinationIp
+| where AlertTimedCountPortsInBinTime > MinimumDifferentPortsThreshold
+```
+― PortScan - AZFWApplicationRule
+```sql
+let RunTime = 1h;
+let StartRunTime = 1d;
+let EndRunTime = StartRunTime - RunTime;
+let MinimumDifferentPortsThreshold = 100;
+let BinTime = 30s;
+AZFWApplicationRule
+| where TimeGenerated between (ago(StartRunTime) .. ago(EndRunTime))
+| summarize AlertTimedCountPortsInBinTime = dcount(DestinationPort) by SourceIp, bin(TimeGenerated, BinTime), Fqdn
 | where AlertTimedCountPortsInBinTime > MinimumDifferentPortsThreshold
 ```
