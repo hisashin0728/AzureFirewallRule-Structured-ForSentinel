@@ -29,7 +29,7 @@ AZFWApplicationRule
 | Port Sweep | TBD | - |
 | Abnormal Deny Rate for Source IP | TBD | - |
 | Abnormal Port to Protocol | TBD | - |
-| Port Scan | TBD | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>- [Port Scan - AZFWApplicationRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWApplicationRule.json) |
+| Port Scan | TBD | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>※AZFWApplicationRule は 80,443 のみのため、Port Scan を書ける必要無しと判断 |
 
 # 例
 PortScan ルールの例
@@ -50,8 +50,7 @@ AzureDiagnostics
 | extend IPCustomEntity = srcip, URLCustomEntity = dsturl
 ```
 
-Structured 形式に変換する場合、テーブルが別なので、join するか 2 つのルールに分けるか要検討<BR>
-※パフォーマンスを考慮して、NetworkRule と ApplicationRule の二つを作成
+Structured 形式に変換する場合、テーブルが別なので、join するか 2 つのルールに分けるかを確認する必要がある<BR>
 
 ― PortScan - AZFWNetworkRule
 ```sql
@@ -63,17 +62,5 @@ let BinTime = 30s;
 AZFWNetworkRule
 | where TimeGenerated between (ago(StartRunTime) .. ago(EndRunTime))
 | summarize AlertTimedCountPortsInBinTime = dcount(DestinationPort) by SourceIp, bin(TimeGenerated, BinTime), DestinationIp
-| where AlertTimedCountPortsInBinTime > MinimumDifferentPortsThreshold
-```
-― PortScan - AZFWApplicationRule
-```sql
-let RunTime = 1h;
-let StartRunTime = 1d;
-let EndRunTime = StartRunTime - RunTime;
-let MinimumDifferentPortsThreshold = 100;
-let BinTime = 30s;
-AZFWApplicationRule
-| where TimeGenerated between (ago(StartRunTime) .. ago(EndRunTime))
-| summarize AlertTimedCountPortsInBinTime = dcount(DestinationPort) by SourceIp, bin(TimeGenerated, BinTime), Fqdn
 | where AlertTimedCountPortsInBinTime > MinimumDifferentPortsThreshold
 ```
