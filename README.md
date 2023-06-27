@@ -29,7 +29,7 @@ AZFWApplicationRule
 | Port Sweep | TBD | - |
 | Abnormal Deny Rate for Source IP | TBD | - |
 | Abnormal Port to Protocol | TBD | - |
-| Port Scan | TBD | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>※AZFWApplicationRule は 80,443 のみのため、Port Scan を書ける必要無しと判断 |
+| Port Scan | Done | - [Port Scan - AZFWNetworkRule.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Port%20Scan%20-%20AZFWNetworkRule.json)<BR>※AZFWApplicationRule は 80,443 のみのため、Port Scan を書ける必要無しと判断 |
 
 # 例
 **PortScan ルール(標準)**
