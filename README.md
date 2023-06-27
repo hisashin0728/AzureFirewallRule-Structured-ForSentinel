@@ -1,0 +1,1 @@
+# AzureFirewallRule-Structured-ForSentinel
