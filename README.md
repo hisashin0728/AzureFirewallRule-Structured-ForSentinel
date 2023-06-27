@@ -15,7 +15,6 @@
 | ---- | ---- | ---- |
 | TI map IP entity to AzureFirewall | TBD | - |
 | Several deny actions registered | TBD | - |
-| Several deny actions registered | TBD | - |
 | Multiple Sources Affected by the Same TI Destination | TBD | - |
 | Port Sweep | TBD | - |
 | Abnormal Deny Rate for Source IP | TBD | - |
