@@ -15,7 +15,7 @@
 | ---- | ---- | ---- |
 | TI map IP entity to AzureFirewall | TBD | - |
 | Several deny actions registered | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
-| Multiple Sources Affected by the Same TI Destination | TBD | - |
+| Multiple Sources Affected by the Same TI Destination | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
 | Port Sweep | TBD | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortSweep.json) |
 | Abnormal Deny Rate for Source IP | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalDenyRateforSourceIP.json) |
 | Abnormal Port to Protocol | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalPortProtocol.json) |
