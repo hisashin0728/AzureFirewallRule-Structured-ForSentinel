@@ -18,5 +18,5 @@
 | Multiple Sources Affected by the Same TI Destination | TBD | - |
 | Port Sweep | TBD | - |
 | Abnormal Deny Rate for Source IP | TBD | - |
-| Abnormal Port to Protocol | TBD | - |
-| Port Scan | Done | [PortScan.json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortScan.json) |
+| Abnormal Port to Protocol | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalPortProtocol.json) |
+| Port Scan | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortScan.json) |
