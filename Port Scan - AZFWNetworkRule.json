@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspace": {
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "id": "[concat(resourceId('Microsoft.OperationalInsights/workspaces/providers', parameters('workspace'), 'Microsoft.SecurityInsights'),'/alertRules/796357e6-163c-4632-b1f5-635ad10f63fc')]",
+            "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/796357e6-163c-4632-b1f5-635ad10f63fc')]",
+            "type": "Microsoft.OperationalInsights/workspaces/providers/alertRules",
+            "kind": "Scheduled",
+            "apiVersion": "2022-11-01-preview",
+            "properties": {
+                "displayName": "Port Scan - AZFWNetworkRule",
+                "description": "Identifies a source IP scanning multiple open ports on Azure Firewall. This can indicate malicious scanning of ports by an attacker, trying to reveal open ports in the organization that can be compromised for initial access.\n\nConfigurable Parameters:\n\n- Port scan time - the time range to look for multiple ports scanned. Default is set to 30 seconds.\n- Minimum different ports threshold - alert only if more than this number of ports scanned. Default is set to 100.",
+                "severity": "Medium",
+                "enabled": false,
+                "query": "let RunTime = 1h;\nlet StartRunTime = 1d;\nlet EndRunTime = StartRunTime - RunTime;\nlet MinimumDifferentPortsThreshold = 100;\nlet BinTime = 30s;\nAZFWNetworkRule\n| where TimeGenerated between (ago(StartRunTime) .. ago(EndRunTime))\n| summarize AlertTimedCountPortsInBinTime = dcount(DestinationPort) by SourceIp, bin(TimeGenerated, BinTime), DestinationIp\n| where AlertTimedCountPortsInBinTime > MinimumDifferentPortsThreshold",
+                "queryFrequency": "PT1H",
+                "queryPeriod": "PT1H",
+                "triggerOperator": "GreaterThan",
+                "triggerThreshold": 1,
+                "suppressionDuration": "PT1H",
+                "suppressionEnabled": false,
+                "startTimeUtc": null,
+                "tactics": [
+                    "Discovery"
+                ],
+                "techniques": [
+                    "T1046"
+                ],
+                "alertRuleTemplateName": "b2c5907b-1040-4692-9802-9946031017e8",
+                "incidentConfiguration": {
+                    "createIncident": true,
+                    "groupingConfiguration": {
+                        "enabled": false,
+                        "reopenClosedIncident": false,
+                        "lookbackDuration": "PT5H",
+                        "matchingMethod": "AllEntities",
+                        "groupByEntities": [],
+                        "groupByAlertDetails": [],
+                        "groupByCustomDetails": []
+                    }
+                },
+                "eventGroupingSettings": {
+                    "aggregationKind": "SingleAlert"
+                },
+                "alertDetailsOverride": null,
+                "customDetails": null,
+                "entityMappings": [
+                    {
+                        "entityType": "IP",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Address",
+                                "columnName": "SourceIp"
+                            }
+                        ]
+                    },
+                    {
+                        "entityType": "URL",
+                        "fieldMappings": [
+                            {
+                                "identifier": "Url",
+                                "columnName": "DestinationIp"
+                            }
+                        ]
+                    }
+                ],
+                "sentinelEntitiesMappings": null,
+                "templateVersion": "1.0.0"
+            }
+        }
+    ]
+}
