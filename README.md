@@ -13,7 +13,8 @@ AzureFirewall 構造型ファイアウォールログとは
 
 |  テンプレートルール名  |  Status  | リンク |
 | ---- | ---- | ---- |
-| TI map IP entity to AzureFirewall | TBD | - |
+| TI map IP entity to AzureFirewall Application Rule | DONE | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/TImapIPentitytoAzureFirewallApplicationRule.json) |
+| TI map IP entity to AzureFirewall Network Rule | DONE | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/TImapIPentitytoAzureFirewallNetworkRule.json) |
 | Several deny actions registered | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
 | Multiple Sources Affected by the Same TI Destination | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
 | Port Sweep | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortSweep.json) |
