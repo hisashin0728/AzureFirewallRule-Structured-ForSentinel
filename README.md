@@ -11,15 +11,15 @@ AzureFirewall 構造型ファイアウォールログとは
 # テンプレートルールリスト
 > Microsoft Sentinel で提供されているテンプレートルールのマッピング表です
 
-|  テンプレートルール名  |  Status  | リンク |
+|  テンプレートルール名  | リンク |
 | ---- | ---- | ---- |
-| TI map IP entity to AzureFirewall | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/TImapIPentitytoAzureFirewall.json) |
-| Several deny actions registered | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
-| Multiple Sources Affected by the Same TI Destination | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
+| TI map IP entity to AzureFirewall | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/TImapIPentitytoAzureFirewall.json) |
+| Several deny actions registered | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
+| Multiple Sources Affected by the Same TI Destination | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
 | Port Sweep | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortSweep.json) |
-| Abnormal Deny Rate for Source IP | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalDenyRateforSourceIP.json) |
-| Abnormal Port to Protocol | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalPortProtocol.json) |
-| Port Scan | Done | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortScan.json) |
+| Abnormal Deny Rate for Source IP | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalDenyRateforSourceIP.json) |
+| Abnormal Port to Protocol | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/AbnormalPortProtocol.json) |
+| Port Scan | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/PortScan.json) |
 
 # サポートなど
 > 不具合や問題があれば、Issues からご連絡下さい。
