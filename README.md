@@ -12,7 +12,7 @@ AzureFirewall 構造型ファイアウォールログとは
 > Microsoft Sentinel で提供されているテンプレートルールのマッピング表です
 
 |  テンプレートルール名  | リンク |
-| ---- | ---- | ---- |
+| ---- | ---- |
 | TI map IP entity to AzureFirewall | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/TImapIPentitytoAzureFirewall.json) |
 | Several deny actions registered | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Several%20deny%20actions%20registered.json) |
 | Multiple Sources Affected by the Same TI Destination | [json](https://github.com/hisashin0728/AzureFirewallRule-Structured-ForSentinel/blob/main/Multiple%20Sources%20Affected%20by%20the%20Same%20TI%20Destination.json) |
